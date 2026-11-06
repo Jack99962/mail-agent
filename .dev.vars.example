@@ -1,0 +1,29 @@
+# Google OAuth 2.0 客户端 ID。
+# 在 Google Cloud Console → API 和服务 → 凭据中创建“OAuth 客户端 ID”后获得。
+GMAIL_CLIENT_ID=""
+
+# 与上方客户端 ID 对应的 OAuth 客户端密钥。
+# 属于敏感信息，不要提交到 Git，也不要暴露在前端代码中。
+GMAIL_CLIENT_SECRET=""
+
+# Gmail OAuth 长期刷新令牌，用于自动换取短期 Access Token。
+# 授权时至少需要 https://www.googleapis.com/auth/gmail.readonly 权限，
+# 并应使用 access_type=offline、prompt=consent 获取 Refresh Token。
+GMAIL_REFRESH_TOKEN=""
+
+# OpenRouter API Key，在 https://openrouter.ai/settings/keys 创建。
+# Worker 使用它调用 wrangler.toml 中 AI_MODEL 指定的模型。
+OPENROUTER_API_KEY=""
+
+# Telegram Bot Token，通过 Telegram 中的 @BotFather 创建 Bot 后获得。
+# 格式通常类似：123456789:AAxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TELEGRAM_BOT_TOKEN=""
+
+# 接收通知的 Telegram 用户、群组或频道 Chat ID。
+# 私聊通常是正整数，群组/频道通常是以 -100 开头的负数；
+# Bot 必须已加入对应会话，并拥有发送消息的权限。
+TELEGRAM_CHAT_ID=""
+
+# 管理接口的 Bearer Token，用于保护 /admin/watch 和 /admin/daily。
+# 请替换为足够长的随机字符串，例如使用：openssl rand -hex 32
+ADMIN_TOKEN="change-me"

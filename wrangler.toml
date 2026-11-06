@@ -1,0 +1,38 @@
+name = "gmail-ai-mail-agent"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[vars]
+GMAIL_USER = "me"
+AI_BASE_URL = "https://openrouter.ai/api/v1"
+AI_MODEL = "openai/gpt-4.1-mini"
+OPENROUTER_APP_URL = "https://YOUR-WORKER.workers.dev"
+OPENROUTER_APP_NAME = "Gmail AI Mail Agent"
+PUBSUB_AUDIENCE = "https://YOUR-WORKER.workers.dev/webhooks/gmail"
+PUBSUB_SERVICE_ACCOUNT = "pubsub-push@mail-agent-20261106-qb.iam.gserviceaccount.com"
+GMAIL_TOPIC_NAME = "projects/mail-agent-20261106-qb/topics/gmail-push"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mail-agent-db"
+database_id = "3c10a947-f0c6-4e7f-82cd-40ae544d2bce"
+
+[[queues.producers]]
+binding = "MAIL_QUEUE"
+queue = "gmail-mail-events"
+
+[[queues.consumers]]
+queue = "gmail-mail-events"
+max_batch_size = 1
+max_batch_timeout = 1
+max_retries = 5
+dead_letter_queue = "gmail-mail-events-dlq"
+max_concurrency = 1
+
+[triggers]
+# Cloudflare Cron 使用 UTC：01:00 = 北京时间 09:00。
+crons = ["0 1 * * *", "0 18 * * *", "*/15 * * * *"]
+
+[observability]
+enabled = true
+
